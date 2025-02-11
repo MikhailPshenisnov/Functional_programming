@@ -41,7 +41,3 @@ console.log(`Пример для 1.3: ${
         new Person("Маша")
     ]).map(x => x.Name).join(", ")
 }`);
-
-
-
-
