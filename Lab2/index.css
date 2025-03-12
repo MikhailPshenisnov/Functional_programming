@@ -1,0 +1,108 @@
+body {
+    font-family: Verdana, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 0 20px;
+    background-color: #f5f2e9;
+}
+
+h1 {
+    color: #3c2f2f;
+    text-align: center;
+}
+
+.task-form {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-input {
+    flex-grow: 1;
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #8c6f4f;
+    border-radius: 4px;
+    background-color: #fff;
+    font-family: Verdana, sans-serif;
+}
+
+.task-list {
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px;
+    margin: 5px 0;
+    background: #e0dccb;
+    border: 1px solid #8c6f4f;
+    border-radius: 4px;
+}
+
+.task-item.completed {
+    background: #d1cdbc;
+    color: #666;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+}
+
+button {
+    padding: 6px 12px;
+    background-color: #8c6f4f;
+    color: white;
+    border: 1px solid #6f543c;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Verdana, sans-serif;
+    transition: opacity 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+.filters {
+    margin: 15px 0;
+}
+
+select {
+    background-color: #fff;
+    border: 1px solid #8c6f4f;
+    border-radius: 4px;
+    font-family: Verdana, sans-serif;
+    padding: 6px 24px 6px 6px;
+}
+
+select:focus {
+    outline: none;
+    border-color: #6f543c;
+    box-shadow: 0 0 3px #8c6f4f;
+}
+
+.task-content {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+.task-text {
+    cursor: pointer;
+}
+
+.task-text.expanded {
+    white-space: normal;
+    word-break: break-word;
+}
+
+.task-times {
+    color: #3c2f2f;
+    font-size: 0.9em;
+}
+
+input[type="checkbox"] {
+    accent-color: #8c6f4f;
+}

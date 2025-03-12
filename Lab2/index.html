@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Планировщик задач</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<h1>Планировщик задач</h1>
+<div class="task-form">
+    <input type="text" class="task-input" placeholder="Введите новую задачу...">
+    <button onclick="addTask(state)">Добавить</button>
+</div>
+<div class="filters">
+    <select onchange="setFilter(state, this.value)">
+        <option value="all">Все задачи</option>
+        <option value="active">Активные</option>
+        <option value="completed">Завершенные</option>
+    </select>
+    <select onchange="setSort(state, this.value)">
+        <option value="timeDesc">По времени (сначала новые)</option>
+        <option value="timeAsc">По времени (сначала старые)</option>
+    </select>
+</div>
+<ul class="task-list" id="taskList"></ul>
+
+<script src="index.js"></script>
+</body>
+</html>
