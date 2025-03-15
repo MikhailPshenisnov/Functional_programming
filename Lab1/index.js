@@ -13,9 +13,9 @@ SumOfList = numberList => numberList.reduce((sum, x) => sum + x, 0);
 // Функция для задания 2.1
 UseSomeFunc = (func, list) => list.map(x => func(x));
 
+// Класс для демонстрации работы функций
 class Number {
     constructor(n) {
-        this.Name = n;
         this.Number = n;
     }
 }

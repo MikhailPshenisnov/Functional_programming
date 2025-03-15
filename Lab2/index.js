@@ -14,7 +14,8 @@ const addTaskToList = (tasks, text) => [
 const updateTaskById = (tasks, id, updates) =>
     tasks.map(task => task.id === id ? {...task, ...updates} : task);
 
-const removeTask = (tasks, id) => tasks.filter(task => task.id !== id);
+const removeTask = (tasks, id) =>
+    tasks.filter(task => task.id !== id);
 
 const switchTaskStatus = (tasks, id) => updateTaskById(tasks, id, {
     completed: !tasks.find(t => t.id === id).completed,
@@ -42,8 +43,8 @@ const sortTasks = (tasks, sortType) => [...tasks].sort((a, b) =>
 // Вспомогательные функции для формата текста задачи и даты
 const trimText = (text, maxLength = 32) =>
     text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
-
-const formatDate = (date) => date ? date.toLocaleString() : '';
+const formatDate = (date) =>
+    date ? date.toLocaleString() : '';
 
 // Начальное значение списка задач
 const initialState = {
@@ -112,7 +113,7 @@ const renderTask = (state, task) => `
     </li>
 `;
 
-// Функция отрисовки можели планировщика задач (также создаются обработчики для кнопок)
+// Функция отрисовки модели планировщика задач (также создаются обработчики для кнопок)
 const render = (state) => {
     const taskList = document.getElementById('taskList');
     const processedTasks = sortTasks(filterTasks(state.tasks, state.filter), state.sortType);
