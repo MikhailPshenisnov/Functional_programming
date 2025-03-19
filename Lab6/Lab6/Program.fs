@@ -70,21 +70,21 @@ let parseOperation (choice: string) : Operation option =
     | "9" -> Some Tg
     | _ -> None
 
-let applyUnaryOperation (operation: Operation) (x: double) : double =
+let applyUnaryOperation (operation: Operation) : double -> double =
     match operation with
-    | SquareRoot -> sqrt x
-    | Sin -> sin x
-    | Cos -> cos x
-    | Tg -> tg x
+    | SquareRoot -> sqrt
+    | Sin -> sin
+    | Cos -> cos
+    | Tg -> tg
     | _ -> failwith "Invalid operation"
 
-let applyBinaryOperation (operation: Operation) (x: double) (y: double) : double =
+let applyBinaryOperation (operation: Operation) : double -> double -> double =
     match operation with
-    | Add -> add x y
-    | Subtract -> subtract x y
-    | Multiply -> multiply x y
-    | Divide -> divide x y
-    | Power -> power x y
+    | Add -> add
+    | Subtract -> subtract
+    | Multiply -> multiply
+    | Divide -> divide
+    | Power -> power
     | _ -> failwith "Invalid operation"
 
 let rec runCalculator () =
@@ -105,7 +105,8 @@ let rec runCalculator () =
 
                 match parseDouble (Console.ReadLine()) with
                 | Some x ->
-                    let result = applyUnaryOperation operation x
+                    let f = applyUnaryOperation operation
+                    let result = f x
                     Console.WriteLine($"Result: %.4f{result}")
                 | None -> Console.WriteLine("Incorrect input")
             | _ ->
@@ -116,7 +117,8 @@ let rec runCalculator () =
 
                 match number1, number2 with
                 | Some x, Some y ->
-                    let result = applyBinaryOperation operation x y
+                    let f = applyBinaryOperation operation
+                    let result = f x y
                     Console.WriteLine($"Result: %.4f{result}")
                 | _ -> Console.WriteLine("Incorrect input")
         with e ->
