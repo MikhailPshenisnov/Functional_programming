@@ -24,7 +24,33 @@ let sin (x: double) : double = Math.Sin(x)
 
 let cos (x: double) : double = Math.Cos(x)
 
-let tg (x: double) : double = Math.Tan(x)
+let tg (x: double) : double =
+    let sine: double = Math.Sin(x)
+    let cosine: double = Math.Cos(x)
+
+    if Math.Round(cosine, 4) = 0 then
+        failwith "Does not exist or strives for infinity"
+
+    sine / cosine
+
+let ctg (x: double) : double =
+    let sine: double = Math.Sin(x)
+    let cosine: double = Math.Cos(x)
+
+    if Math.Round(sine, 4) = 0 then
+        failwith "Does not exist or strives for infinity"
+
+    cosine / sine
+
+let degToRad (x: double) : double = x * (Math.PI / 180.00)
+
+let sinDeg (x: double) : double = sin (degToRad x)
+
+let cosDeg (x: double) : double = cos (degToRad x)
+
+let tgDeg (x: double) : double = tg (degToRad x)
+
+let ctgDeg (x: double) : double = ctg (degToRad x)
 
 type Operation =
     | Add
@@ -34,8 +60,13 @@ type Operation =
     | Power
     | SquareRoot
     | Sin
+    | SinDeg
     | Cos
+    | CosDeg
     | Tg
+    | TgDeg
+    | Ctg
+    | CtgDeg
 
 let parseDouble (input: string) : double option =
     match Double.TryParse(input.Replace(".", ",")) with
@@ -51,10 +82,15 @@ let printMenu () =
         4. Division (x / y)
         5. Power (x ^ y)
         6. Square root (sqrt(x))
-        7. Sin (sin(x))
-        8. Cos (cos(x))
-        9. Tg (tg(x))
-        0. Exit (0 or any other symbol)"
+        7_1. Sin radians (sin(x))
+        7_2. Sin degrees (sin(x))
+        8_1. Cos radians (cos(x))
+        8_2. Cos degrees (cos(x))
+        9_1. Tg radians (tg(x))
+        9_2. Tg degrees (tg(x))
+        0_1. Ctg radians (ctg(x))
+        0_2. Ctg degrees (ctg(x))
+        *. Exit (* or any other symbol)"
     )
 
 let parseOperation (choice: string) : Operation option =
@@ -65,17 +101,27 @@ let parseOperation (choice: string) : Operation option =
     | "4" -> Some Divide
     | "5" -> Some Power
     | "6" -> Some SquareRoot
-    | "7" -> Some Sin
-    | "8" -> Some Cos
-    | "9" -> Some Tg
+    | "7_1" -> Some Sin
+    | "7_2" -> Some SinDeg
+    | "8_1" -> Some Cos
+    | "8_2" -> Some CosDeg
+    | "9_1" -> Some Tg
+    | "9_2" -> Some TgDeg
+    | "0_1" -> Some Ctg
+    | "0_2" -> Some CtgDeg
     | _ -> None
 
 let applyUnaryOperation (operation: Operation) : double -> double =
     match operation with
-    | SquareRoot -> sqrt
+    | SquareRoot -> squareRoot
     | Sin -> sin
+    | SinDeg -> sinDeg
     | Cos -> cos
+    | CosDeg -> cosDeg
     | Tg -> tg
+    | TgDeg -> tgDeg
+    | Ctg -> ctg
+    | CtgDeg -> ctgDeg
     | _ -> failwith "Invalid operation"
 
 let applyBinaryOperation (operation: Operation) : double -> double -> double =
@@ -99,8 +145,13 @@ let rec runCalculator () =
             match operation with
             | SquareRoot
             | Sin
+            | SinDeg
             | Cos
-            | Tg ->
+            | CosDeg
+            | Tg
+            | TgDeg
+            | Ctg
+            | CtgDeg ->
                 Console.Write("Input number: ")
 
                 match parseDouble (Console.ReadLine()) with
